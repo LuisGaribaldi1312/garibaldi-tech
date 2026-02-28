@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Garibaldi Tech Solutions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const sections = document.querySelectorAll(".section");
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = 1;
+                entry.target.style.transform = "translateY(0)";
+            }
+        });
+    });
+
+    sections.forEach(section => {
+        section.style.opacity = 0;
+        section.style.transform = "translateY(50px)";
+        section.style.transition = "all 0.6s ease";
+        observer.observe(section);
+    });
+});
+</script>
+
+<body>
+
+<nav class="navbar">
+    <h2 class="logo">Tecnologia a tu alcance</h2>
+    <div class="nav-links">
+        <a href="#servicios">Servicios</a>
+        <a href="#planes">Planes</a>
+        <a href="#contacto">Contacto</a>
+    </div>
+</nav>
+
+<div class="hero">
+    <h1>Garibaldi Tech Solutions</h1>
+    <p>Soluciones digitales, licencias y optimización profesional en Playa del Carmen</p>
+    <a class="btn" href="https://wa.me/529984371180" target="_blank">WhatsApp 998 437 1180</a>
+    <a class="btn btn-call" href="tel:9982219571">Llamadas 998 221 9571</a>
+</div>
+
+<div class="section" id="servicios">
+    <h2>Nuestros Servicios</h2>
+    <p>✔ Instalación y activación de Office</p>
+    <p>✔ Licencias AutoCAD</p>
+    <p>✔ Instalación y optimización de Windows</p>
+    <p>✔ Eliminación de virus</p>
+    <p>✔ Soporte empresarial mensual</p>
+    <p>✔ Desarrollo de paginas Web</p>
+    </div>
+
+<div class="section" id="planes">
+    <h2>Planes Empresariales</h2>
+    <p><strong>Plan Básico:</strong> Soporte remoto anual — Desde $799</p>
+    <p><strong>Plan Profesional:</strong> Optimización trimestral — Desde $1,499</p>
+    <p><strong>Plan Premium:</strong> Soporte continuo empresarial — Cotización personalizada</p>
+</div>
+
+<div class="section" id="contacto">
+    <h2>Contacto</h2>
+    <form method="POST">
+        <input type="text" name="nombre" placeholder="Tu nombre" required><br><br>
+        <input type="text" name="telefono" placeholder="Tu teléfono" required><br><br>
+        <textarea name="mensaje" placeholder="Escribe tu mensaje" required></textarea><br><br>
+        <button type="submit" class="btn">Enviar</button>
+    </form>
+</div>
+
+</body>
+</html>
