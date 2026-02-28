@@ -39,6 +39,27 @@ def inicio():
             except Exception as e:
                 print("Excepción al enviar Telegram:", e)
 
+        # Enviar mensaje por WhatsApp vía Twilio si está configurado
+        tw_sid = os.environ.get("TWILIO_ACCOUNT_SID")
+        tw_token = os.environ.get("TWILIO_AUTH_TOKEN")
+        tw_from = os.environ.get("TWILIO_WHATSAPP_FROM")
+        tw_to = os.environ.get("WHATSAPP_TO")
+        if tw_sid and tw_token and tw_from and tw_to:
+            try:
+                tw_url = f"https://api.twilio.com/2010-04-01/Accounts/{tw_sid}/Messages.json"
+                body = f"Nuevo mensaje ({fecha})\nNombre: {nombre}\nTel: {telefono}\nMensaje: {mensaje}"
+                resp = requests.post(
+                    tw_url,
+                    auth=(tw_sid, tw_token),
+                    data={"From": tw_from, "To": tw_to, "Body": body},
+                )
+                if resp.status_code in (200, 201):
+                    print("Mensaje enviado por WhatsApp/Twilio")
+                else:
+                    print("Error Twilio:", resp.status_code, resp.text)
+            except Exception as e:
+                print("Excepción al enviar Twilio:", e)
+
     return render_template("index.html")
 
 import os

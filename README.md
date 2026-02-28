@@ -53,3 +53,16 @@ Notificaciones por Telegram (opcional)
 	- `TELEGRAM_TOKEN` → token del bot (BotFather)
 	- `TELEGRAM_CHAT_ID` → id del chat o tu id de Telegram
 - El servidor ya envía una notificación a Telegram si estas variables están configuradas.
+
+Notificaciones por WhatsApp (opcional, vía Twilio)
+- Puedes recibir los mensajes en WhatsApp usando Twilio. Pasos resumidos:
+	1. Crea cuenta en https://www.twilio.com y ve a Messaging → Try WhatsApp → Sandbox.
+	2. Sigue las instrucciones para unir tu número al sandbox (enviar el código por WhatsApp).
+	3. Obtén `Account SID` y `Auth Token` desde la consola de Twilio.
+	4. En GitHub/Render/Railway/Heroku añade las variables de entorno:
+		 - `TWILIO_ACCOUNT_SID` = tu Account SID
+		 - `TWILIO_AUTH_TOKEN` = tu Auth Token
+		 - `TWILIO_WHATSAPP_FROM` = el número de Twilio en formato `whatsapp:+1415...` (sandbox)
+		 - `WHATSAPP_TO` = tu número destino en formato `whatsapp:+52XXXXXXXXXX`
+	5. Fuerza un redeploy del servicio; los mensajes se enviarán a WhatsApp cuando los usuarios usen el formulario.
+
