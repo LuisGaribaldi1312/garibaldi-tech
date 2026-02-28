@@ -1,7 +1,34 @@
 from flask import Flask, render_template, request
-from datetime import datetime
+import datetime
 import os
 import requests
+from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, Text, DateTime
+from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy import insert as sa_insert
+
+# Database setup: use DATABASE_URL env var (Postgres on Railway) or local SQLite fallback
+DB_URL = os.environ.get("DATABASE_URL")
+if not DB_URL:
+    # local sqlite file
+    DB_URL = f"sqlite:///{os.path.join(os.getcwd(), 'mensajes.db')}"
+
+if DB_URL.startswith("sqlite:///"):
+    engine = create_engine(DB_URL, connect_args={"check_same_thread": False})
+else:
+    engine = create_engine(DB_URL)
+
+metadata = MetaData()
+messages_table = Table(
+    "messages",
+    metadata,
+    Column("id", Integer, primary_key=True),
+    Column("fecha", DateTime),
+    Column("nombre", String(200)),
+    Column("telefono", String(50)),
+    Column("mensaje", Text),
+)
+
+metadata.create_all(engine)
 
 app = Flask(__name__)
 
@@ -11,7 +38,7 @@ def inicio():
         nombre = request.form["nombre"]
         telefono = request.form["telefono"]
         mensaje = request.form["mensaje"]
-        fecha = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        fecha = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         mensajes_path = os.path.join(os.getcwd(), "mensajes.txt")
         with open(mensajes_path, "a", encoding="utf-8") as archivo:
             archivo.write(f"\nFecha: {fecha}\n")
@@ -59,6 +86,18 @@ def inicio():
                     print("Error Twilio:", resp.status_code, resp.text)
             except Exception as e:
                 print("Excepción al enviar Twilio:", e)
+
+        # Guardar en la base de datos (si está disponible)
+        try:
+            with engine.begin() as conn:
+                conn.execute(
+                    sa_insert(messages_table).values(
+                        fecha=datetime.datetime.now(), nombre=nombre, telefono=telefono, mensaje=mensaje
+                    )
+                )
+            print("Mensaje guardado en la base de datos")
+        except SQLAlchemyError as e:
+            print("Error al guardar en la DB:", e)
 
     return render_template("index.html")
 

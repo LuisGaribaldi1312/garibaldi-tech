@@ -66,3 +66,8 @@ Notificaciones por WhatsApp (opcional, vía Twilio)
 		 - `WHATSAPP_TO` = tu número destino en formato `whatsapp:+52XXXXXXXXXX`
 	5. Fuerza un redeploy del servicio; los mensajes se enviarán a WhatsApp cuando los usuarios usen el formulario.
 
+Almacenamiento persistente (recomendado)
+- Recomendado: provisiona una base de datos PostgreSQL (por ejemplo en Railway) y configura la variable de entorno `DATABASE_URL` con la URL de conexión. El servidor guardará cada mensaje en la tabla `messages` además de escribir en `mensajes.txt`.
+- Si usas Railway: crea un service "Postgres" en tu proyecto y copia la `DATABASE_URL` en las variables del proyecto.
+
+
