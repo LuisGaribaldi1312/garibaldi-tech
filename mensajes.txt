@@ -9,3 +9,18 @@ Nombre: ricardo
 Teléfono: 9984371180
 Mensaje: quiero un servicio
 ----------------------------------------
+Fecha: 2026-02-28 12:49:54
+Nombre: Prueba
+Teléfono: 600600600
+Mensaje: Mensaje de prueba
+----------------------------------------
+Fecha: 2026-02-28 12:59:19
+Nombre: Luis Alberto 
+Teléfono: 9982219571
+Mensaje: me urge servicio contactame
+----------------------------------------
+Fecha: 2026-02-28 13:12:09
+Nombre: Luis Alberto 
+Teléfono: 9982219571
+Mensaje: me urge servicio contactame
+----------------------------------------
