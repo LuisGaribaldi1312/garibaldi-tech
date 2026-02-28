@@ -47,3 +47,9 @@ Nota de seguridad
 
 Contacto
 - Si quieres, puedo añadir más instrucciones (despliegue, env vars, Docker).
+
+Notificaciones por Telegram (opcional)
+- Puedes recibir los mensajes directamente en Telegram creando un bot y configurando dos variables de entorno en tu servicio (Render/Railway/Heroku):
+	- `TELEGRAM_TOKEN` → token del bot (BotFather)
+	- `TELEGRAM_CHAT_ID` → id del chat o tu id de Telegram
+- El servidor ya envía una notificación a Telegram si estas variables están configuradas.
