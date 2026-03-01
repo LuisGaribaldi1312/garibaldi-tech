@@ -24,3 +24,13 @@ Nombre: Luis Alberto
 Teléfono: 9982219571
 Mensaje: me urge servicio contactame
 ----------------------------------------
+Fecha: 2026-02-28 18:03:59
+Nombre: Miriam Avigai
+Teléfono: 984134766
+Mensaje: quiero un servicio
+----------------------------------------
+Fecha: 2026-02-28 18:45:00
+Nombre: TestUser
+Teléfono: 9984371180
+Mensaje: Prueba desde local
+----------------------------------------

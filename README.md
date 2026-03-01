@@ -54,20 +54,7 @@ Notificaciones por Telegram (opcional)
 	- `TELEGRAM_CHAT_ID` → id del chat o tu id de Telegram
 - El servidor ya envía una notificación a Telegram si estas variables están configuradas.
 
-Notificaciones por WhatsApp (opcional, vía Twilio)
-- Puedes recibir los mensajes en WhatsApp usando Twilio. Pasos resumidos:
-	1. Crea cuenta en https://www.twilio.com y ve a Messaging → Try WhatsApp → Sandbox.
-	2. Sigue las instrucciones para unir tu número al sandbox (enviar el código por WhatsApp).
-	3. Obtén `Account SID` y `Auth Token` desde la consola de Twilio.
-	4. En GitHub/Render/Railway/Heroku añade las variables de entorno:
-		 - `TWILIO_ACCOUNT_SID` = tu Account SID
-		 - `TWILIO_AUTH_TOKEN` = tu Auth Token
-		 - `TWILIO_WHATSAPP_FROM` = el número de Twilio en formato `whatsapp:+1415...` (sandbox)
-		 - `WHATSAPP_TO` = tu número destino en formato `whatsapp:+52XXXXXXXXXX`
-	5. Fuerza un redeploy del servicio; los mensajes se enviarán a WhatsApp cuando los usuarios usen el formulario.
-
-Almacenamiento persistente (recomendado)
-- Recomendado: provisiona una base de datos PostgreSQL (por ejemplo en Railway) y configura la variable de entorno `DATABASE_URL` con la URL de conexión. El servidor guardará cada mensaje en la tabla `messages` además de escribir en `mensajes.txt`.
-- Si usas Railway: crea un service "Postgres" en tu proyecto y copia la `DATABASE_URL` en las variables del proyecto.
+Notas de despliegue
+- Este repositorio ahora está en un estado mínimo que solo requiere `Flask`. Para desplegarlo en un servicio como Render o Railway puedes usar los valores por defecto y el `startCommand` en Render está configurado para ejecutar `python app.py`.
 
 
